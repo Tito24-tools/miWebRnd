@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Cuentas Streaming</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #1aff00;
+            text-align: center;
+            flex-direction: column;
+        }
+        .message-box {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            font-size: 1.2rem;
+        }
+        #countdown {
+            font-size: 1.5rem;
+            color: red;
+        }
+        select, button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button:disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="countdown"></div>
+    <div id="message-box" class="message-box">
+        Selecciona una App de Streaming y dale click para Generar
+    </div>
+
+    <select id="categorySelect">
+        <option value="Crunchyroll">Crunchyroll</option>
+        <option value="HBO Max">HBO Max</option>
+        <option value="Hulu Streaming">Hulu Streaming</option>
+    </select>
+    <button id="generateBtn">Generar Cuenta</button>
+
+    <script>
+        const messages = {
+            "Crunchyroll": [
+                "jeremyveron053@gmail.com:30216332jere@@",
+                "leoeletrotecnico12@hotmail.com:29042011",
+                "travassosaniyah@gmail.com:Aniayht09",
+				"luana@outlook.de:dedodope",
+				"santosyuliana18@gmail.com:HD345SDZ",
+				"s20FEwelisson@gmail.com:@baiano2006",
+				"kevin.raja02@gmail.com:ysytvsau93a",
+                "davonheath1@outlook.com:Holypanther10#",
+				"marko.ivkovic08@gmail.com:marko123456",
+				"isaacmeirelles3@gmail.com:sextafeira2010",
+				"jvazqueznogue@gmail.com:Leon2014",
+				"martellivan018@gmail.com:Kaneki22",
+				"nayaha20223@gmail.com:Kemma_Naya2021",
+				"arkgoda@gmail.com:Run123qqw",
+				"loburipab@email-wizard.com:123456",
+				"pelep2125@gmail.com:peleleo",
+				"livermater01@gmail.com:forbm2019",
+				"lucas.pinheiro.merino@gmail.com:8077369@Luck",
+				"sergiorochamarquez@gmail.com:205197916",
+				"lautitulo11@gmail.com:Lautaro05",
+				"daryllaromin@gmail.com:Daryll@031688",
+				"urnise42@gmail.com:Halo20030303",
+				"bernardlavilary@gmail.com:Capras69",
+				"brokesimtulon208@yopmail.com:Javierf208*",
+				"eileenfurtado39@hotmail.com:cerdita00"
+
+            ],
+            "HBO Max": [
+                "leonardo_thz@yahoo.com:Matteo106510",
+                "svetoslav_rusinov@abv.bg:svetlio19855 ",
+                "gigi_rem@outlook.com:Supermario99",
+				"karlinecarboni@yahoo.com.br:161061kcb",
+				"pepelotasrojas2022@gmail.com:kanike74",
+				"yuripsantos22@gmail.com:mIglig1422?!",
+				"pancharau@gmail.com:Aperol2204",
+				"ssvannalbarracin@hotmail.com:Tequila1",
+				"Gabriel_fernandes88@hotmail.com:21123200Gf.",
+				"israelguerrero14@gmail.com:AjAyap230",
+				"mnaty_cba@hotmail.com:100610naty",
+				"kuumadslarsen@gmail.com:hijklmn1",
+				"gabylgonzalez@gmail.com:Julimuli01!",
+				"ivankpo_25@hotmail.com:ivangenos23",
+				"anders@pliniussen.com:Aa54115411",
+				"sarafina_diandra@hotmail.com:ResidentEvil5"
+				
+            ],
+            "Hulu Streaming": [
+			
+				"chuluong942@gmail.com:chukhailuong",
+                "dlangston666@gmail.com:Langston84",
+                "tidalhifi2019yeet@gmail.com:8ajt8ajtAa1!",
+                "tyty381381@icloud.com:BRv@%mEdDxf?7v$",
+                "dantedylan9@gmail.com:shadow6494",
+                "davidquinde11@gmail.com:dqmr091401",
+                "simpkitchen54@gmail.com:Bbcswagyolopls5!",
+                "marialola74@gmail.com:@25dejunio",
+                "hailearenae@icloud.com:hrenae99",
+                "michaeladedipe800@gmail.com:mikeking",
+                "Desireefurbee@gmail.com:ait0656510481",
+                "taylordemilo@gmail.com:sg75tkdt",
+                "abdarouflouli@tele2.nl:P$__-lic",
+                "cgecoolie@outlook.com:Auburn6833",
+                "jeriahmyaw@gmail.com:2164309805Aa",
+                "hansoyo11@gmail.com:mylovE321",
+                "luismendezgue@gmail.com:guero170",
+                "likeaboss.ku@gmail.com:Kurenda64",
+                "jatim_kab_ngawi:ngawi2014",
+                "alessandrlcast@ziggo.nl:791563",
+                "crschubach0001@student.stcc.edu:Schubach9185",
+                "Cameysucelly@gmail.com:Mondragon3026",
+                "0952676752:hulu2008",
+                "Moose2313:Moosie23!",
+                "shay030484:Anthony0056*",
+                "director@1hope365.onmicrosoft.com:Login123",
+                "0972672502:inyourfeelings",
+                "ali_mansour_91@hotmail.com:Iloverawane11",
+                "trashpanda1205@gmail.com:trashpanda",
+                "+251994605261:kivan1994",
+                "muhammedaslam836@gmail.com:Thuthulu@7",
+                "mwadley05@gmail.com:bunni0306",
+                "alan.eub@yahoo.com:BenjiCali55",
+                "hida123123@icloud.com:Huda1990",
+                "c.hope1999:lululuna",
+                "wrestlersms11@aol.com:%7t9Q4ULUWBn",
+                "pop123.3073765@gmail.com:pppoooppp",
+                "yomaryhenriquez@comcast.net:sharil28",
+                "gcram@maine.rr.com:0302cin56",
+                "tera_rob574@yahoo.com:tera3491*",
+                "balikidarnell3@gmail.com:DeezNuts123",
+                "lemons5eze@talk21.com:TobiaS8ic",
+                "gamingprotech2020@gmail.com:Jorge0310",
+                "mommycc776@gmail.com:#1Cali776",
+                "nstorruellas@hotmail.com:santos2022",
+                "storres8083:2Sierra3",
+                "genesiozmail@gmail.com:God15Love!",
+                "fairypineapples@gmail.com:$uckmidickplease!",
+                "bpayne1398@icloud.com:Family125",
+                "bramblitt@gmail.com:111Mojo777!",
+                "shouya150808@gmail.com:musashi0928",
+                "xnugsx@gmail.com:Peppertaz122370!",
+                "davereichert@outlook.com:t9gphM9e3ZLPubY",
+                "ashleehouseman86@gmail.com:$hadow0820",
+                "kam@mehtabuilders.com:swami1bapa",
+                "clepri2000@gmail.com:PearlDrummer8284",
+                "Chuluunjim@gmail.com:legomovie321",
+                "joliver23696@gmail.com:Chicken_301",
+                "andihst:AYD281280mc@",
+                "jholmes@embarqmail.com:14213Orr",
+                "nopehululu@gmail.com:UUn$i9DtA*U_-Di",
+                "here777@vodafone.de:n7186t",
+                "smkn1tapunghulukampar:upinipin",
+                "leroypa56@gmail.com:Bryson111",
+                "joshmullins@gmail.com:blaze2004"
+
+            ]
+        };
+
+        let isCooldown = false;
+        let cooldownTime = 5 * 60; // 5 minutos en segundos
+        let timer;
+
+        const countdownElement = document.getElementById('countdown');
+        const messageBox = document.getElementById('message-box');
+        const generateBtn = document.getElementById('generateBtn');
+        const categorySelect = document.getElementById('categorySelect');
+
+        function randomMessage(category) {
+            const categoryMessages = messages[category];
+            const message = categoryMessages[Math.floor(Math.random() * categoryMessages.length)];
+            return `Categoría: ${category}\n${message}`;
+        }
+
+        function startCooldown() {
+            isCooldown = true;
+            generateBtn.disabled = true;
+            let timeLeft = cooldownTime;
+
+            timer = setInterval(() => {
+                const minutes = Math.floor(timeLeft / 60);
+                const seconds = timeLeft % 60;
+                countdownElement.textContent = `Estás en cooldown. Te quedan ${minutes}:${seconds < 10 ? '0' : ''}${seconds} para generar otra cuenta.`;
+                timeLeft--;
+
+                if (timeLeft < 0) {
+                    clearInterval(timer);
+                    isCooldown = false;
+                    generateBtn.disabled = false;
+                    countdownElement.textContent = "";
+                }
+            }, 1000);
+        }
+
+        generateBtn.addEventListener('click', () => {
+            if (isCooldown) {
+                return; // No generar un mensaje si estamos en cooldown
+            }
+
+            const selectedCategory = categorySelect.value;
+            messageBox.textContent = randomMessage(selectedCategory);
+            startCooldown();
+        });
+    </script>
+
+</body>
+</html>
